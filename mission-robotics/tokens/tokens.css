@@ -1,0 +1,13 @@
+:root {
+  /* Mission Robotics brand tokens v2 */
+  --mr-near-black: #17181a;
+  --mr-cream: #e8e6dd;
+  --mr-white: #ffffff;
+  --mr-green: #4ADE80; /* THE accent — matches newtheory-adjacent green, site canonical */
+  /* mark geometry */
+  --mr-mark-grid: 7;
+  --mr-mark-dot-base: 0.50;
+  --mr-mark-dot-span: 0.42;
+  --mr-mark-radius-ratio: 0.29;
+  /* clear space = half mark height; min mark 24px, favicon 16px */
+}

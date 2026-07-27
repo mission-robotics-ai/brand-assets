@@ -6,22 +6,11 @@ Do not add partner/sponsor logos here (LiveKit, Modal, Rerun, etc.) — those ar
 
 ## Mission Robotics — `mission-robotics/`
 
-| File | Format | Notes / use |
-|---|---|---|
-| `mission-robotics-logo.svg` | SVG (raster-embedded) | Full wordmark lockup, light variant |
-| `mission-robotics-logo-dark.svg` | SVG (raster-embedded) | Full wordmark lockup, dark variant |
-| `mission-robotics-logo-300dpi.png` | PNG, 4000×1145, RGBA | Full lockup, light, print/hi-res |
-| `mission-robotics-logo-72dpi.png` | PNG, 1400×401, RGBA | Full lockup, light, screen/web |
-| `mission-robotics-logo-dark-300dpi.png` | PNG, 4000×1145, RGBA | Full lockup, dark, print/hi-res |
-| `mission-robotics-logo-dark-72dpi.png` | PNG, 1400×401, RGBA | Full lockup, dark, screen/web |
-| `mission-robotics-mark-300dpi.png` | PNG, 2000×1996, RGBA | Icon-only mark, light, hi-res |
-| `mission-robotics-mark-dark-300dpi.png` | PNG, 2000×1996, RGBA | Icon-only mark, dark, hi-res |
-| `mr-orb-mark-bright.png` | PNG, 471×470, RGBA | Orb mark, bright/glow treatment |
-| `mr-orb-trim.png` | PNG, 471×470, RGB | Orb mark, trimmed/flat treatment |
+**v2 (July 2026): fully generated vector kit.** Every asset is emitted from geometry by `build_assets.py` — the dot-matrix mark from its size-falloff formula, the wordmark as Instrument Serif outlined to true paths. No raster-embedded SVGs, no fuzzy exports. See [`mission-robotics/README.md`](mission-robotics/README.md) for the full usage guide (inks per ground, min sizes, clear space, favicon variant, regeneration).
 
-Note: the two `logo*.svg` files are raster images embedded in an SVG wrapper, not true vector paths. No vector mark file exists yet — only PNG marks.
+Quick map: `mark/` `wordmark/` `lockups/` `avatar/` (SVG, per ink: near-black / cream / white / green) · `png/` (raster ladders incl. pixel-snapped favicons) · `tokens/` (tokens.json + tokens.css) · `effects/` (legacy glow orbs — a treatment, not the logo).
 
-The "logo" and "dark" naming isn't independently verified against a style guide in this repo — when in doubt about which variant reads correctly on a given background, check both before shipping.
+Canonical green: `#4ADE80`. (The card system CSS still carries the older `#46e07a` — migrate on next card regen.)
 
 ## New Theory — `new-theory/`
 
@@ -37,7 +26,7 @@ See `new-theory/GAPS.md` — only the white variant exists.
 - Dark-ground logo (white/light ink) goes on light backgrounds only if there's no light-ground alternative — check contrast before use.
 - Use the dark-ink variant (`*-dark.svg` / `*-dark-*.png`) on light backgrounds, the light/white variant on dark backgrounds.
 - The mark (orb / icon) stands alone at small sizes — favicons, avatars, anywhere the full wordmark lockup won't read. Don't shrink the full lockup below the point where the wordmark blurs; swap to the mark instead.
-- Prefer SVG where one exists and is true vector (New Theory). For Mission Robotics, the SVGs are raster-embedded, so pick the PNG dpi that matches the output (72dpi screen, 300dpi print) rather than assuming the SVG scales cleanly.
+- Prefer SVG everywhere — Mission Robotics SVGs are true vector as of v2. Use the PNG ladders when a raster is required, matching size to output.
 
 ## Brand tokens (Mission Robotics)
 
