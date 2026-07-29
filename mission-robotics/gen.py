@@ -69,6 +69,16 @@ TOKENS = {
         "corner_radius_ratio": RADIUS_RATIO,
         "viewbox": "0 0 7 7",
     },
+    "byline": {
+        "text": "by New Theory",
+        "color": {"value": "#6b7280", "role": '"by New Theory" byline — fixed across all inks, matches site gray-500'},
+        "font": "Inter 400",
+        "tracking_em": 0.025,
+        # measured from solarpunk-loft header @8x (measure_byline.py; canonical constants in byline.py)
+        "h_ratio": 0.5793,    # byline ink height / wordmark ink height
+        "gap_ratio": 0.4966,  # wordmark ink bottom -> byline ink top / wm ink height
+        "x_ratio": 0.0276,    # byline ink left - wordmark ink left / wm ink height
+    },
     "clearspace": {
         "rule": "half the mark height on all sides",
         "value": "0.5 * mark_height",
@@ -91,6 +101,9 @@ def write_tokens():
            "  --mr-cream: #e8e6dd;",
            "  --mr-white: #ffffff;",
            "  --mr-green: #4ADE80; /* THE accent — matches newtheory-adjacent green, site canonical */",
+           '  --mr-byline: #6b7280; /* "by New Theory" byline — fixed across all inks, matches site gray-500 */',
+           "  /* byline: Inter 400, tracking 0.025em; ratios vs wordmark ink height:",
+           "     h 0.5793, gap 0.4966, x 0.0276 (measured from solarpunk-loft header @8x) */",
            "  /* mark geometry */",
            "  --mr-mark-grid: 7;",
            "  --mr-mark-dot-base: 0.50;",

@@ -10,8 +10,8 @@ anytime with the scripts below.
 | Dir | Holds |
 |-----|-------|
 | `mark/` | The dot-matrix mark, one true-vector SVG per ink. |
-| `wordmark/` | "Mission Robotics" outlined to paths — `oneline` and `twoline`, per ink. Also the source `InstrumentSerif-Regular.ttf`. |
-| `lockups/` | Mark + wordmark, at signage-band proportions — `horizontal` (two-line) and `oneline`, per ink. |
+| `wordmark/` | "Mission Robotics" outlined to paths — `oneline` and `twoline`, per ink, plus `-by-new-theory` variants. Also the source TTFs (`InstrumentSerif-Regular.ttf`, `Inter-Regular.ttf`). |
+| `lockups/` | Mark + wordmark, at signage-band proportions — `horizontal` (two-line) and `oneline`, per ink, plus `-by-new-theory` variants. |
 | `avatar/` | Mark centered in a square with clear space — transparent, on near-black, on cream. |
 | `png/` | Rasterized ladders (transparent): mark 2000/512/128, wordmark & lockup 2000, avatar 1024/512/256/64, favicons 16/32/64. |
 | `tokens/` | `tokens.json` and `tokens.css` — colors, mark geometry, clear-space and min-size rules. |
@@ -38,6 +38,24 @@ anytime with the scripts below.
 
 Green is an accent, not a default ink — the mark is near-black or cream in almost every context.
 
+## "by New Theory" variants
+
+Every text-bearing asset also ships a `-by-new-theory` variant — wordmark
+(one-line and two-line) and lockup (oneline and horizontal), per ink — with the
+"by New Theory" byline underneath the wordmark, matching the website header
+treatment exactly (Inter 400, +0.025em tracking, proportions measured from the
+live header by `measure_byline.py`).
+
+- **Byline color is fixed `#6b7280` on every ink** — it matches the site's
+  gray-500 and stays put whether the wordmark is near-black, cream, green, or white.
+- **When to use:** anything where the New Theory relationship should be visible —
+  event pages, decks, partner-facing material.
+- **On busy photo grounds** the plain (no-byline) white lockup is safer — the
+  gray byline needs a quiet ground to stay legible.
+- **Minimum sizes:** the byline renders at ~46% of the wordmark's type size, so
+  keep it above ~9px — that means lockup-by-new-theory at ≥180px wide and
+  wordmark-by-new-theory at ≥140px wide.
+
 ## Clear space & minimum sizes
 
 - **Clear space:** half the mark height on all sides (the `avatar/` files bake this in).
@@ -55,7 +73,8 @@ the pixel grid. Use these for favicons; use the SVG (or 128px+ PNG) everywhere e
 
 - **Wordmark:** Instrument Serif 400 — already outlined to paths in `wordmark/` and
   `lockups/`, so rendering them needs no font installed.
-- **UI / body:** Inter (400 / 500 / 600).
+- **UI / body:** Inter (400 / 500 / 600). The "by New Theory" byline is Inter 400,
+  outlined from the committed `wordmark/Inter-Regular.ttf`.
 - **Display one-offs:** Archivo Black.
 
 All three are Google Fonts under the SIL Open Font License.

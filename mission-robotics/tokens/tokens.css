@@ -4,6 +4,9 @@
   --mr-cream: #e8e6dd;
   --mr-white: #ffffff;
   --mr-green: #4ADE80; /* THE accent — matches newtheory-adjacent green, site canonical */
+  --mr-byline: #6b7280; /* "by New Theory" byline — fixed across all inks, matches site gray-500 */
+  /* byline: Inter 400, tracking 0.025em; ratios vs wordmark ink height:
+     h 0.5793, gap 0.4966, x 0.0276 (measured from solarpunk-loft header @8x) */
   /* mark geometry */
   --mr-mark-grid: 7;
   --mr-mark-dot-base: 0.50;

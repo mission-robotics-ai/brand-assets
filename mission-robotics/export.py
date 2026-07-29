@@ -45,6 +45,12 @@ if __name__ == "__main__":
             export(f"{HERE}/wordmark/wordmark-{lay}-{ink}.svg", f"{png}/wordmark-{lay}-{ink}-2000.png", 2000)
         for lay in ("horizontal", "oneline"):
             export(f"{HERE}/lockups/lockup-{lay}-{ink}.svg", f"{png}/lockup-{lay}-{ink}-2000.png", 2000)
+        for lay in ("oneline", "twoline"):
+            export(f"{HERE}/wordmark/wordmark-{lay}-by-new-theory-{ink}.svg",
+                   f"{png}/wordmark-{lay}-by-new-theory-{ink}-2000.png", 2000)
+        for lay in ("horizontal", "oneline"):
+            export(f"{HERE}/lockups/lockup-{lay}-by-new-theory-{ink}.svg",
+                   f"{png}/lockup-{lay}-by-new-theory-{ink}-2000.png", 2000)
     for name in ("transparent", "on-near-black", "on-cream"):
         for px in (1024, 512, 256, 64):
             export(f"{HERE}/avatar/avatar-{name}.svg", f"{png}/avatar-{name}-{px}.png", px)

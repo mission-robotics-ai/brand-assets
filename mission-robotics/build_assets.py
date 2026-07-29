@@ -11,6 +11,7 @@ import math, os
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.boundsPen import BoundsPen
+from byline import byline_group, BYLINE_H_RATIO, BYLINE_GAP_RATIO, BYLINE_X_RATIO
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TTF = os.path.join(HERE, "wordmark", "InstrumentSerif-Regular.ttf")
@@ -85,6 +86,40 @@ def lockup(lines, ink, mark_h=100.0):
     svg.append('</svg>')
     return "".join(svg)
 
+def lockup_byline(lines, ink, mark_h=100.0):
+    """Lockup with 'by New Theory' under the wordmark; the mark centers against
+       the FULL text block (wordmark ink top -> byline ink bottom), matching the
+       site header's items-center flex. Wordmark sizing is identical to the plain
+       lockups; byline ratios couple to a single line's type size, so the two-line
+       case scales them from the one-line ink height at the same scale factor."""
+    gap = GAP_RATIO * mark_h
+    if len(lines) == 2:
+        wm_h = WM2_RATIO * mark_h
+        _, (x0, y0, x1, y1) = compose_lines(lines)
+        k = wm_h / (y1 - y0)                        # scale used for the two-line block
+        _, (a0, b0, a1, b1) = compose_lines(["Mission Robotics"])
+        h1 = (b1 - b0) * k                          # one-line ink height at that scale
+    else:
+        wm_h = mark_h * 0.62
+        h1 = wm_h
+    b_h = BYLINE_H_RATIO * h1
+    b_gap = BYLINE_GAP_RATIO * h1
+    b_x = BYLINE_X_RATIO * h1
+    text_h = wm_h + b_gap + b_h
+    total_h = max(mark_h, text_h)
+    mark_y = (total_h - mark_h) / 2
+    text_y = (total_h - text_h) / 2
+    wm_x = mark_h + gap
+    wmg, wm_w = wordmark_group(lines, ink, wm_h, wm_x, text_y)
+    byg, b_w = byline_group(b_h, wm_x + b_x, text_y + wm_h + b_gap)
+    total_w = wm_x + max(wm_w, b_x + b_w)
+    svg = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total_w:.2f} {total_h:.2f}" shape-rendering="geometricPrecision">']
+    svg.append(f'<svg x="0" y="{mark_y:.3f}" width="{mark_h}" height="{mark_h}" viewBox="0 0 7 7">{mark_dots(ink)}</svg>')
+    svg.append(wmg)
+    svg.append(byg)
+    svg.append('</svg>')
+    return "".join(svg)
+
 def avatar(ink, ground=None):
     """Mark centered in a square, clear space = half mark height on each side.
        mark_h + 2*(0.5*mark_h) = 2*mark_h → canvas is 2x mark. viewBox 0 0 200 200, mark 100 centered."""
@@ -97,7 +132,11 @@ if __name__ == "__main__":
     for name, ink in INKS.items():
         open(os.path.join(ld, f"lockup-horizontal-{name}.svg"), "w").write(lockup(["Mission", "Robotics"], ink))
         open(os.path.join(ld, f"lockup-oneline-{name}.svg"), "w").write(lockup(["Mission Robotics"], ink))
-    print("lockups: horizontal + oneline x", len(INKS))
+        open(os.path.join(ld, f"lockup-horizontal-by-new-theory-{name}.svg"), "w").write(
+            lockup_byline(["Mission", "Robotics"], ink))
+        open(os.path.join(ld, f"lockup-oneline-by-new-theory-{name}.svg"), "w").write(
+            lockup_byline(["Mission Robotics"], ink))
+    print("lockups: (horizontal + oneline) x (plain + by-new-theory) x", len(INKS))
     ad = os.path.join(HERE, "avatar"); os.makedirs(ad, exist_ok=True)
     open(os.path.join(ad, "avatar-transparent.svg"), "w").write(avatar("#17181a", None))
     open(os.path.join(ad, "avatar-on-near-black.svg"), "w").write(avatar("#e8e6dd", "#17181a"))
