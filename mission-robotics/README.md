@@ -15,6 +15,7 @@ anytime with the scripts below.
 | `avatar/` | Mark centered in a square with clear space — transparent, on near-black, on cream. |
 | `png/` | Rasterized ladders (transparent): mark 2000/512/128, wordmark & lockup 2000, avatar 1024/512/256/64, favicons 16/32/64. |
 | `tokens/` | `tokens.json` and `tokens.css` — colors, mark geometry, clear-space and min-size rules. |
+| `morrigan/` | Morrigan's avatar, a crow in profile on the same 7×7 dot-matrix grid as the mark (SVG and 1024px PNG). Hand-drawn bitmap – not made by the scripts below. Used as her Slack avatar. |
 | `effects/` | Legacy raster glow-orb marks from v1. A texture/treatment, **not** the logo — do not use as the primary mark or favicon. |
 
 ## Colors
